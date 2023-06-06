@@ -5,13 +5,29 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="リソース ファイル">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="ソース ファイル\player">
+      <UniqueIdentifier>{36b1360f-04ae-4c6c-9b5d-7a8954fdfe9b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\ヘッダー ファイル">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    <Filter Include="ソース ファイル\obstacle">
+      <UniqueIdentifier>{560a48e1-c711-4aa8-a469-2075aaef2860}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\scene">
+      <UniqueIdentifier>{0e35b86d-5ac5-41d6-bd24-8fc7c71bae54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\timer">
+      <UniqueIdentifier>{bad31eb5-1c40-4aad-a8f2-c45afa66afbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\shadow">
+      <UniqueIdentifier>{780508b7-2bac-475d-9eb0-8937f0a7b7f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\backGround">
+      <UniqueIdentifier>{92cec7c1-682d-426a-a0f5-d07880338300}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\sucore">
+      <UniqueIdentifier>{e1380be1-d574-413b-b2ce-2a077b9cb9eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\collision">
+      <UniqueIdentifier>{de2a39d4-8166-481c-b852-cccdc4f864d9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -19,63 +35,63 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="player.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\player</Filter>
     </ClCompile>
     <ClCompile Include="obstacle.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="background.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="collision.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="sucore.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="timer.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="shadow.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\obstacle</Filter>
     </ClCompile>
     <ClCompile Include="tittle.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\scene</Filter>
     </ClCompile>
     <ClCompile Include="Result.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="timer.cpp">
+      <Filter>ソース ファイル\timer</Filter>
+    </ClCompile>
+    <ClCompile Include="shadow.cpp">
+      <Filter>ソース ファイル\shadow</Filter>
+    </ClCompile>
+    <ClCompile Include="background.cpp">
+      <Filter>ソース ファイル\backGround</Filter>
+    </ClCompile>
+    <ClCompile Include="sucore.cpp">
+      <Filter>ソース ファイル\sucore</Filter>
+    </ClCompile>
+    <ClCompile Include="collision.cpp">
+      <Filter>ソース ファイル\collision</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="player.h">
-      <Filter>ソース ファイル\ヘッダー ファイル</Filter>
+      <Filter>ソース ファイル\player</Filter>
     </ClInclude>
     <ClInclude Include="obstacle.h">
-      <Filter>ソース ファイル\ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="background.h">
-      <Filter>ソース ファイル\ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="collision.h">
-      <Filter>ソース ファイル\ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="sucore.h">
-      <Filter>ソース ファイル\ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="timer.h">
-      <Filter>ソース ファイル\ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="shadow.h">
-      <Filter>ソース ファイル\ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="gameScene.h">
-      <Filter>ソース ファイル\ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="tittle.h">
-      <Filter>ソース ファイル\ヘッダー ファイル</Filter>
+      <Filter>ソース ファイル\obstacle</Filter>
     </ClInclude>
     <ClInclude Include="result.h">
-      <Filter>ソース ファイル\ヘッダー ファイル</Filter>
+      <Filter>ソース ファイル\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="tittle.h">
+      <Filter>ソース ファイル\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="timer.h">
+      <Filter>ソース ファイル\timer</Filter>
+    </ClInclude>
+    <ClInclude Include="gameScene.h">
+      <Filter>ソース ファイル\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="shadow.h">
+      <Filter>ソース ファイル\shadow</Filter>
+    </ClInclude>
+    <ClInclude Include="background.h">
+      <Filter>ソース ファイル\backGround</Filter>
+    </ClInclude>
+    <ClInclude Include="sucore.h">
+      <Filter>ソース ファイル\sucore</Filter>
+    </ClInclude>
+    <ClInclude Include="collision.h">
+      <Filter>ソース ファイル\collision</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
