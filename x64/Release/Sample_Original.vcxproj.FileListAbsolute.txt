@@ -1,0 +1,5 @@
+C:\Users\student\Desktop\自主制作\x64\Release\Sample_Original.exe
+C:\Users\tokiy\OneDrive\デスクトップ\水炎\x64\Release\Sample_Original.exe
+D:\M版水炎戦伝記\x64\Release\Sample_Original.exe
+D:\ゲーム制作(アクション)\M版水炎戦伝記\x64\Release\Sample_Original.exe
+D:\ゲーム制作(アクション)\action\x64\Release\Sample_Original.exe

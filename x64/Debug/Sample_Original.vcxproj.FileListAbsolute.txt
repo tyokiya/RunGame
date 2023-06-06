@@ -1,0 +1,17 @@
+C:\Users\imaimasayuki\Documents\Csor\Sample_Original\x64\Debug\Sample_Original.exe
+D:\ゲームプログラム\x64\Debug\Sample_Original.exe
+D:\1\x64\Debug\Sample_Original.exe
+D:\自主制作\x64\Debug\Sample_Original.exe
+G:\自主制作\x64\Debug\Sample_Original.exe
+C:\Users\student\Desktop\自主制作\x64\Debug\Sample_Original.exe
+C:\Users\tokiy\OneDrive\デスクトップ\自主制作\x64\Debug\Sample_Original.exe
+D:\ゲーム制作(アクション)\action\x64\Debug\Sample_Original.exe
+C:\Users\tokiy\OneDrive\デスクトップ\action\x64\Debug\Sample_Original.exe
+D:\action(クラス化\action(クラス化\x64\Debug\Sample_Original.exe
+D:\ランゲーム\x64\Debug\Sample_Original.exe
+G:\ランゲーム\x64\Debug\Sample_Original.exe
+C:\Users\tokiy\game Project\runGame\x64\Debug\Sample_Original.exe
+D:\runGame\x64\Debug\Sample_Original.exe
+C:\Users\student\Desktop\runGame\x64\Debug\Sample_Original.exe
+C:\Users\tokiy\OneDrive\デスクトップ\runGame\x64\Debug\Sample_Original.exe
+G:\runGame\x64\Debug\Sample_Original.exe
