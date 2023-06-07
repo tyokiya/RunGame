@@ -1,6 +1,5 @@
 #pragma once
 #include "DxLib.h"
-#define RADIUS 10.0f
 
 struct Player;
 struct Obstacle;
@@ -20,6 +19,13 @@ struct  CollisionCircle
 void CollisionCircleInit(CollisionCircle* circle, VECTOR setposition);
 
 /// <summary>
+/// はちの当たり判定円の座標初期化
+/// </summary>
+/// <param name="circle">当たり判定構造体のポインタ</param>
+/// <param name="setposition">セットする座標</param>
+void CollisionBeeCircleInit(CollisionCircle* circle, VECTOR setposition);
+
+/// <summary>
 /// プレイヤーの当たり判定座標移動
 /// </summary>
 /// <param name="circle">当たり判定構造体のポインタ</param>
@@ -34,10 +40,10 @@ void PlayerCollisionCircleMove(CollisionCircle* circle, float jumpCoefficient);
 void ObstacleCollisionCircleMove(CollisionCircle* circle, float moveDistance);
 
 /// <summary>
-/// 障害物の当たり判定球描画
+/// 障害物の当たり判定球描画(テスト用)
 /// </summary>
 /// <param name="circle">当たり判定構造体のポインタ</param>
-void CollisionCircleDraw(CollisionCircle* circle);
+void CollisionCircleDraw(CollisionCircle* circle, int radius);
 
 /// <summary>
 /// プレイヤーと障害物の衝突判定
@@ -47,4 +53,5 @@ void CollisionCircleDraw(CollisionCircle* circle);
 /// <param name="ply">プレイヤーの構造体のポインタ</param>
 /// <param name="obstacle">障害物の構造体のポインタ</param>
 /// <param name="sucore">得点の構造体のポインタ</param>
-void CollisionJudgement(CollisionCircle* plyCircle, CollisionCircle* obstacleCircle, Player* ply, Obstacle* obstacle, Sucore* sucore);
+/// <param name="radius">あたり判定球の半径</param>
+void CollisionJudgement(CollisionCircle* plyCircle, CollisionCircle* obstacleCircle, Player* ply, Obstacle* obstacle, Sucore* sucore, int radius);

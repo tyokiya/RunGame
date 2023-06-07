@@ -18,6 +18,21 @@ void ObstacleInit(Obstacle* obstacle, int modelHandl)
 	obstacle->moveSpeed = OBSTACLE_DEFOMOVE_SPEED;
 }
 
+void ObstacleBeeInit(Obstacle* obstacle, int modelHandl)
+{
+	//3Dモデル読み込み
+	obstacle->modelHandle = modelHandl;
+	//座標セット
+	obstacle->pos = VGet(OBSTACLE_INITIAL_POSX, OBSTACLE_BEE_POSY, OBSTACLE_INITIAL_POSZ);
+	MV1SetPosition(obstacle->modelHandle, obstacle->pos);
+	//拡大率セット
+	MV1SetScale(obstacle->modelHandle, VGet(0.1f, 0.1f, 0.1f));
+	//フラグを立てる
+	obstacle->displayFlg = true;
+	//速度初期化
+	obstacle->moveSpeed = OBSTACLE_BEE_SPEED;
+}
+
 void ObstacleUpdate(Obstacle* obstacle, CollisionCircle* collision)
 {
 	//ランダム初期化
@@ -39,7 +54,38 @@ void ObstacleUpdate(Obstacle* obstacle, CollisionCircle* collision)
 		//obstacle->moveSpeed = 
 	}
 
-	//1.8ずつプレイヤーに向かって移動
+	//プレイヤーに向かって移動
+	if (obstacle->displayFlg == true)
+	{
+		//座標の増加
+		obstacle->pos.z -= obstacle->moveSpeed;
+		//障害物の座標設定
+		MV1SetPosition(obstacle->modelHandle, obstacle->pos);
+		//当たり判定の移動
+		ObstacleCollisionCircleMove(collision, obstacle->moveSpeed);
+	}
+
+	//画面外にでた時点で表示フラグを下ろす
+	if (obstacle->pos.z <= -20.0)
+	{
+		obstacle->displayFlg = false;
+	}
+}
+
+void ObstacleBeeUpdate(Obstacle* obstacle, CollisionCircle* collision)
+{
+	//障害物の再生成
+	if (obstacle->displayFlg == false)
+	{
+		//フラグを立てる
+		obstacle->displayFlg = true;
+		//座標のセット
+		obstacle->pos = VGet(0.0f, OBSTACLE_BEE_POSY, OBSTACLE_INITIAL_POSZ);
+		//当たり判定の座標セット
+		CollisionBeeCircleInit(collision, obstacle->pos);
+	}
+
+	//プレイヤーに向かって移動
 	if (obstacle->displayFlg == true)
 	{
 		//座標の増加

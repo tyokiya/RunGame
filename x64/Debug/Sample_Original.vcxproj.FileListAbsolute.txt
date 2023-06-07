@@ -15,3 +15,4 @@ D:\runGame\x64\Debug\Sample_Original.exe
 C:\Users\student\Desktop\runGame\x64\Debug\Sample_Original.exe
 C:\Users\tokiy\OneDrive\デスクトップ\runGame\x64\Debug\Sample_Original.exe
 G:\runGame\x64\Debug\Sample_Original.exe
+C:\Users\tokiy\OneDrive\デスクトップ\gamecreate\RunGame\x64\Debug\Sample_Original.exe

@@ -45,12 +45,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	//プレヤー
 	Player ply;
 	//障害物
-	Obstacle obstacle;
+	Obstacle obstacle;			//ブロック障害物
+	Obstacle obstacleBee;		//はち障害物
 	//背景画像
 	BackGround backGround;
 	//当たり判定
 	CollisionCircle plyCollision;
 	CollisionCircle obstacleCollision;
+	CollisionCircle obstacleBeeCollision;
 	//得点
 	Sucore gameSucore;
 	//タイマー
@@ -69,10 +71,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	/// 初期化処理
 	/////////////////////////////////////
 	PlayerInit(&ply);			
-	ObstacleInit(&obstacle, MV1LoadModel("img/map/block1.mv1"));	
+	ObstacleInit(&obstacle, MV1LoadModel("img/obstacle/block1.mv1"));	
+	ObstacleBeeInit(&obstacleBee, MV1LoadModel("img/obstacle/Bee.mv1"));
 	BackGroundInit(&backGround);		
 	CollisionCircleInit(&plyCollision, VGet(0.0f,10.0f,0.0f));	
-	CollisionCircleInit(&obstacleCollision, obstacle.pos);			
+	CollisionCircleInit(&obstacleCollision, obstacle.pos);
+	CollisionBeeCircleInit(&obstacleBeeCollision, obstacleBee.pos);
 	SucoreInit(&gameSucore);
 	TimerInit(&timer);
 	ShadowInit(&shadow);
@@ -126,7 +130,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 				//シーン切り替え
 				nowGameScene = PlayScene;
 				//障害物の最初期化
-				ObstacleInit(&obstacle, MV1LoadModel("img/map/block1.mv1"));
+				ObstacleInit(&obstacle, MV1LoadModel("img/obstacle/block1.mv1"));
 			}
 			break;
 
@@ -140,7 +144,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			{
 				PlayerUpdata(&ply, fps, &plyCollision, &obstacle, &gameSucore);
 				ObstacleUpdate(&obstacle, &obstacleCollision);
-				CollisionJudgement(&plyCollision, &obstacleCollision, &ply, &obstacle, &gameSucore);
+				ObstacleBeeUpdate(&obstacleBee, &obstacleBeeCollision);
+				//プレイヤーと岩の当たり判定
+				CollisionJudgement(&plyCollision, &obstacleCollision, &ply, &obstacle, &gameSucore, OBSTACLE_RADIUS);
+				//プレイヤーとはちの当たり判定
+				CollisionJudgement(&plyCollision, &obstacleBeeCollision, &ply, &obstacleBee, &gameSucore, OBSTACLE_BEE_RADIUS);
 			}
 			BackGroundUpdate(&backGround);
 
@@ -149,9 +157,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			////////////////////////////////////
 			BackGroundDraw(&backGround);
 			ObstacleDraw(&obstacle);
+			ObstacleDraw(&obstacleBee);
 			GetSucoreDraw(&gameSucore);
 			TotalSucoreDraw(&gameSucore);
 			TimerDraw(&timer);
+			CollisionCircleDraw(&obstacleBeeCollision, OBSTACLE_BEE_RADIUS);
+			CollisionCircleDraw(&obstacleCollision, OBSTACLE_RADIUS);
 			if (ply.displayFlg == true)
 			{
 				ShadowDraw(&shadow, ply.jumpFlg);
