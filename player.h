@@ -4,6 +4,7 @@
 #define JUMP 3.5f
 #define JUMPMAXPEWER 15
 #define PLYEFFECTCNT 10
+#define PLAYER_RADIUS 10.0f
 
 struct  CollisionCircle;
 struct Obstacle;
@@ -46,6 +47,7 @@ void PlayerUpdata(Player* ply, int fps, CollisionCircle* collision, Obstacle* ob
 /// プレヤーのジャンプ処理
 /// </summary>
 /// <param name="ply">プレイヤー構造体のポインタ</param>
+/// <param name="collision">当たり判定の構造体ポインタ</param>
 void PlayerJumpMove(Player* ply, int fps, CollisionCircle* collision);
 
 /// <summary>
@@ -58,4 +60,5 @@ void PlayerDraw(Player* ply);
 /// プレヤーの死亡時の動き
 /// </summary>
 /// <param name="ply">プレイヤー構造体のポインタ</param>
-void PlayerDeathMotion(Player* ply, int fps);
+/// <param name="collision">当たり判定の構造体ポインタ</param>
+void PlayerDeathMotion(Player* ply, int fps, CollisionCircle* collision);

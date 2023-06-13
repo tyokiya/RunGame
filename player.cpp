@@ -41,6 +41,7 @@ void PlayerUpdata(Player* ply, int fps,CollisionCircle* collision,Obstacle* obst
 
 	//プレイヤーの座標設定
 	MV1SetPosition(ply->modelHandle, ply->pos);
+	
 	//キー読み込み
 	if (CheckHitKey(KEY_INPUT_SPACE) == 1 && ply->jumpFlg == false)
 	{
@@ -104,7 +105,10 @@ void PlayerJumpMove(Player* ply, int fps,CollisionCircle* collision)
 	//地面にめり込んでいないかの確認
 	if (ply->pos.y < 0.0f)
 	{
+		//座標セット
 		ply->pos.y = 0.0f;
+		//当たり判定座標セット
+		collision->pos.y = 10.0f;
 	}
 	//ジャンプ係数を下げる
 	if (fps % 2 == 0 && ply->jumpBtnPrevPress == false)
@@ -121,7 +125,7 @@ void PlayerDraw(Player* ply)
 	//DrawSphere3D(VGet(ply->pos.x,ply->pos.y + 10.0f,ply->pos.z), 10.0f, 32, GetColor(255, 0, 0), GetColor(255, 255, 255), TRUE);
 }
 
-void PlayerDeathMotion(Player* ply, int fps)
+void PlayerDeathMotion(Player* ply, int fps, CollisionCircle* collision)
 {
 	SetFontSize(200);
 	VECTOR screenPos;
@@ -155,6 +159,8 @@ void PlayerDeathMotion(Player* ply, int fps)
 		{
 			ply->reviveFlg = false;
 			ply->displayFlg = true;
+			//当たり判定の座標リセット
+			collision->pos = VGet(0.0f, 10.0f, 0.0f);
 		}
 		//エフェクトカウントりっせと
 		ply->effectCnt = 0;

@@ -48,7 +48,7 @@ void ObstacleUpdate(Obstacle* obstacle, CollisionCircle* collision)
 		//座標のセット
 		obstacle->pos = VGet(0.0f, 0.0f, OBSTACLE_INITIAL_POSZ);
 		//当たり判定の座標セット
-		CollisionCircleInit(collision, obstacle->pos);
+		collision->pos = obstacle->pos;
 		//速度のランダム生成
 		obstacle->moveSpeed =((rand() % 40 + 1) + 10) / 10;
 		//obstacle->moveSpeed = 
@@ -82,7 +82,8 @@ void ObstacleBeeUpdate(Obstacle* obstacle, CollisionCircle* collision)
 		//座標のセット
 		obstacle->pos = VGet(0.0f, OBSTACLE_BEE_POSY, OBSTACLE_INITIAL_POSZ);
 		//当たり判定の座標セット
-		CollisionBeeCircleInit(collision, obstacle->pos);
+		collision->pos = obstacle->pos;
+		collision->pos.y += 10.0f;
 	}
 
 	//プレイヤーに向かって移動
@@ -110,4 +111,10 @@ void ObstacleDraw(Obstacle* obstacle)
 	{
 		MV1DrawModel(obstacle->modelHandle);
 	}
+}
+
+void AllObstacleFlgReset(Obstacle* obstacle, Obstacle* obsracle_bee)
+{
+	obstacle->displayFlg = false;
+	obsracle_bee->displayFlg = false;
 }

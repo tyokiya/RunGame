@@ -54,4 +54,10 @@ void ObstacleBeeUpdate(Obstacle* obstacle, CollisionCircle* collision);
 /// <param name="obstacle">障害物の構造体ポインタ</param>
 void ObstacleDraw(Obstacle* obstacle);
 
+/// <summary>
+/// すべて障害物のフラグをおろす　
+/// </summary>
+/// <param name="obstacle">いわ障害物の構造体ポインタ</param>
+/// <param name="obsracle_bee">ハチ障害物の構造体ポインタ</param>
+void AllObstacleFlgReset(Obstacle* obstacle, Obstacle* obsracle_bee);
 

@@ -74,9 +74,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	ObstacleInit(&obstacle, MV1LoadModel("img/obstacle/block1.mv1"));	
 	ObstacleBeeInit(&obstacleBee, MV1LoadModel("img/obstacle/Bee.mv1"));
 	BackGroundInit(&backGround);		
-	CollisionCircleInit(&plyCollision, VGet(0.0f,10.0f,0.0f));	
-	CollisionCircleInit(&obstacleCollision, obstacle.pos);
-	CollisionBeeCircleInit(&obstacleBeeCollision, obstacleBee.pos);
+	CollisionCircleInit(&plyCollision, VGet(0.0f,10.0f,0.0f),PLAYER_RADIUS);	
+	CollisionCircleInit(&obstacleCollision, obstacle.pos,OBSTACLE_RADIUS);
+	CollisionBeeCircleInit(&obstacleBeeCollision, obstacleBee.pos,OBSTACLE_BEE_RADIUS);
 	SucoreInit(&gameSucore);
 	TimerInit(&timer);
 	ShadowInit(&shadow);
@@ -148,12 +148,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 				//プレイヤーと岩の当たり判定
 				if (ply.displayFlg == true)
 				{
-					CollisionJudgement(&plyCollision, &obstacleCollision, &ply, &obstacle, &gameSucore, OBSTACLE_RADIUS);
+					CollisionJudgement(&plyCollision, &obstacleCollision, &ply, &obstacle, &gameSucore);
 				}
 				//プレイヤーとはちの当たり判定
 				if (ply.displayFlg == true)
 				{
-					CollisionJudgement(&plyCollision, &obstacleBeeCollision, &ply, &obstacleBee, &gameSucore, OBSTACLE_BEE_RADIUS);
+					CollisionJudgement(&plyCollision, &obstacleBeeCollision, &ply, &obstacleBee, &gameSucore);
 				}
 			}
 			BackGroundUpdate(&backGround);
@@ -167,8 +167,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			GetSucoreDraw(&gameSucore);
 			TotalSucoreDraw(&gameSucore);
 			TimerDraw(&timer);
-			CollisionCircleDraw(&obstacleBeeCollision, OBSTACLE_BEE_RADIUS);
+			//当たり判定球描画(テスト用)
+			/*CollisionCircleDraw(&obstacleBeeCollision, OBSTACLE_BEE_RADIUS);
 			CollisionCircleDraw(&obstacleCollision, OBSTACLE_RADIUS);
+			CollisionCircleDraw(&plyCollision, PLAYER_RADIUS);*/
 			if (ply.displayFlg == true)
 			{
 				ShadowDraw(&shadow, ply.jumpFlg);
@@ -178,7 +180,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			//被弾で減点処理
 			if (ply.displayFlg == false)
 			{
-				PlayerDeathMotion(&ply, fps);
+				PlayerDeathMotion(&ply, fps,&plyCollision);
+				//リス狩りにならないよう障害物のフラグ初期化
+				AllObstacleFlgReset(&obstacle, &obstacleBee);
 			}
 
 			//ゲーム開始カウントダウン処理

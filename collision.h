@@ -9,6 +9,7 @@ struct  CollisionCircle
 {
 	VECTOR pos;						//当たり判定円の中心座標
 	bool hitFlg;					//衝突フラグ
+	float radius;					//当たり判定の半径
 };
 
 /// <summary>
@@ -16,14 +17,16 @@ struct  CollisionCircle
 /// </summary>
 /// <param name="circle">当たり判定構造体のポインタ</param>
 /// <param name="setposition">セットする座標</param>
-void CollisionCircleInit(CollisionCircle* circle, VECTOR setposition);
+/// <param name="radius">セットする半径</param>
+void CollisionCircleInit(CollisionCircle* circle, VECTOR setposition,float radius);
 
 /// <summary>
 /// はちの当たり判定円の座標初期化
 /// </summary>
 /// <param name="circle">当たり判定構造体のポインタ</param>
 /// <param name="setposition">セットする座標</param>
-void CollisionBeeCircleInit(CollisionCircle* circle, VECTOR setposition);
+/// <param name="radius">セットする半径</param>
+void CollisionBeeCircleInit(CollisionCircle* circle, VECTOR setposition, float radius);
 
 /// <summary>
 /// プレイヤーの当たり判定座標移動
@@ -53,5 +56,4 @@ void CollisionCircleDraw(CollisionCircle* circle, int radius);
 /// <param name="ply">プレイヤーの構造体のポインタ</param>
 /// <param name="obstacle">障害物の構造体のポインタ</param>
 /// <param name="sucore">得点の構造体のポインタ</param>
-/// <param name="radius">あたり判定球の半径</param>
-void CollisionJudgement(CollisionCircle* plyCircle, CollisionCircle* obstacleCircle, Player* ply, Obstacle* obstacle, Sucore* sucore, int radius);
+void CollisionJudgement(CollisionCircle* plyCircle, CollisionCircle* obstacleCircle, Player* ply, Obstacle* obstacle, Sucore* sucore);
