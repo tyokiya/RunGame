@@ -146,9 +146,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 				ObstacleUpdate(&obstacle, &obstacleCollision);
 				ObstacleBeeUpdate(&obstacleBee, &obstacleBeeCollision);
 				//プレイヤーと岩の当たり判定
-				CollisionJudgement(&plyCollision, &obstacleCollision, &ply, &obstacle, &gameSucore, OBSTACLE_RADIUS);
+				if (ply.displayFlg == true)
+				{
+					CollisionJudgement(&plyCollision, &obstacleCollision, &ply, &obstacle, &gameSucore, OBSTACLE_RADIUS);
+				}
 				//プレイヤーとはちの当たり判定
-				CollisionJudgement(&plyCollision, &obstacleBeeCollision, &ply, &obstacleBee, &gameSucore, OBSTACLE_BEE_RADIUS);
+				if (ply.displayFlg == true)
+				{
+					CollisionJudgement(&plyCollision, &obstacleBeeCollision, &ply, &obstacleBee, &gameSucore, OBSTACLE_BEE_RADIUS);
+				}
 			}
 			BackGroundUpdate(&backGround);
 

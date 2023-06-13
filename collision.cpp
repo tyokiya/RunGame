@@ -52,4 +52,5 @@ void CollisionJudgement(CollisionCircle* plyCircle, CollisionCircle* obstacleCir
 		//Ž€–SƒTƒEƒ“ƒhÄ¶
 		PlaySoundMem(ply->deatSound, DX_PLAYTYPE_BACK);
 	}
+	
 }
