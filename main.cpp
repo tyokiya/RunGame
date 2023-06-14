@@ -66,9 +66,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	bool startFlg = false;					//ゲーム開始フラグ
 	bool tittleTextFlg = false;				//タイトルテキストのフラグ
-	bool timeOverFlg = false;				//時間切れフラグ
-	int timeOverFrameCnt = 0;				//時間切れ時のフレーム数
-
 	bool resultSucoreFlg = false;			//リザルトのスコア描画フラグ
 
 	//////////////////////////////////////
@@ -135,8 +132,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 				fps = 0;
 				//シーン切り替え
 				nowGameScene = PlayScene;
-				//障害物の最初期化
+				//障害物の再初期化
 				ObstacleInit(&obstacle, MV1LoadModel("img/obstacle/block1.mv1"));
+				CollisionCircleInit(&obstacleCollision, obstacle.pos, OBSTACLE_RADIUS);
 			}
 			break;
 
@@ -211,24 +209,27 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 				//フラグを下ろす
 				startFlg = false;
 				//時間切れフラグを立てる
-				timeOverFlg = true;
+				timer.timeOverFlg = true;
 				//フレームを取る
-				timeOverFrameCnt = fps;
+				timer.timeOverFrameCnt = fps;
 			}
 			//時間切れ描画
-			if (timeOverFlg == true)
+			if (timer.timeOverFlg == true)
 			{
 				SetFontSize(200);
 				DrawString(190, 50, "Time over", GetColor(255, 0, 0));
 			}
 
 			//シーン切り替え
-			if (fps == timeOverFrameCnt + 120 && timeOverFlg == true)
+			if (fps == timer.timeOverFrameCnt + 120 && timer.timeOverFlg == true)
 			{
 				//プレイヤーリザルト用初期化
 				ResultPlayerInit(&ply);
+				startFlg = false;					//ゲーム開始フラグ
+				tittleTextFlg = false;				//タイトルテキストのフラグ
+				resultSucoreFlg = false;			//リザルトのスコア描画フラグ
+
 				nowGameScene = ResultScene;
-				
 			}
 
 			break;
@@ -244,13 +245,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			PlayerDraw(&ply);
 
 			//キー入力でシーン切り替え
-			if (CheckHitKey(KEY_INPUT_SPACE) == 1)
+			if (CheckHitKey(KEY_INPUT_0) == 1)
 			{
-				ReSutartInit()
+				ReSutartInit(ply, gameSucore, timer,obstacleBee, obstacleBeeCollision);
 				//fps初期化
 				fps = 0;
 				//シーン切り替え
-				nowGameScene = PlayScene;
+				nowGameScene = TitleScene;
 				//障害物の最初期化
 				ObstacleInit(&obstacle, MV1LoadModel("img/obstacle/block1.mv1"));
 			}
@@ -272,6 +273,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		prevCount = nowCount;
 		//フレームカウント増加
 		fps++;
+		//int型の最大値を超えないための処理
+		if (fps > 2000000000)
+		{
+			fps = 0;
+		}
 	}
 
 

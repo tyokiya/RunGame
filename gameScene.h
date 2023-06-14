@@ -1,5 +1,11 @@
 #pragma once
 
+struct Player;
+struct Obstacle;
+struct Sucore;
+struct CollisionCircle;
+struct Timer;
+
 //ゲームシーン列挙体
 enum GameScene
 {
@@ -9,4 +15,4 @@ enum GameScene
 };
 
 //再スタート時の必要な要素の初期化
-void ReSutartInit(Player& ply, Sucore,)
+void ReSutartInit(Player& ply, Sucore& sucore, Timer& timer, Obstacle& obstacle_Bee, CollisionCircle& collision);

@@ -81,8 +81,6 @@ void TittleUpdate(Player* ply, Obstacle* obstacle,int fps, TitlleMaterial& mater
 	//áŠQ•¨À•W‰Šú‰»
 	if (obstacle->pos.z <= -20.0)
 	{
-		//‘¬“x‚Ìƒ‰ƒ“ƒ_ƒ€¶¬
-		obstacle->moveSpeed = ((rand() % 40 + 1) + 10) / 10;
 		obstacle->pos = VGet(OBSTACLE_INITIAL_POSX, OBSTACLE_INITIAL_POSY, OBSTACLE_INITIAL_POSZ);
 	}
 

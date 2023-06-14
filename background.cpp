@@ -14,15 +14,10 @@ void BackGroundInit(BackGround* back)
 	back->bardImg = LoadGraph("img/backImg/bard.png");
 
 	//‰_‰æ‘œİ’è
-	for (int i = 0; i < 2; i++)
-	{
-		back->cloudImg[i] = LoadGraph("img/backImg/cloud.png");
-	}
+	back->cloudImg = LoadGraph("img/backImg/cloud.png");
 	//‰_À•Wİ’è
-	for (int i = 0; i < 2; i++)
-	{
-		//back->cloudImgPos[i] = 
-	}
+	back->cloudImgX = CLOUD_POS_X;
+	back->cloudImgY = CLOUD_POS_Y;
 
 	//’¹‚ÌÀ•W‚¹‚Á‚Ä‚¢
 	back->bardImgX = 1200;

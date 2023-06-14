@@ -8,6 +8,10 @@ void TimerInit(Timer* timer)
 	timer->timeLimit = TIMELIMIT;
 	//画像読み込み
 	timer->timerImg = LoadGraph("img/backimg/timer.png", TRUE);
+	//フラグ初期化
+	timer->timeOverFlg = false;
+	//カウント初期化
+	timer->timeOverFrameCnt = 0;
 }
 
 void TimerCountDown(Timer* timer,int fps)

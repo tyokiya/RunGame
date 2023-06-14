@@ -1,5 +1,5 @@
 #pragma once
-#define TIMELIMIT 1	//90
+#define TIMELIMIT 10	//90
 #define TIMER_IMG_SIZE 45
 
 //タイマー構造体
@@ -7,6 +7,8 @@ struct Timer
 {
 	int timeLimit;			//制限時間
 	int timerImg;			//イメージハンドル
+	bool timeOverFlg;				//時間切れフラグ
+	int timeOverFrameCnt;				//時間切れ時のフレーム数
 };
 
 /// <summary>

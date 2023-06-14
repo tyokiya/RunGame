@@ -1,12 +1,14 @@
 #pragma once
 #define IMG_MOVE_SPEED 10.0f
 #define BARD_IMG_SIZE 75
+#define CLOUD_POS_X 1400
+#define CLOUD_POS_Y 200
 //背景画像構造体
 struct BackGround
 {
 	int backImg;					//背景画像ハンドル
 	int roadImg;					//道画像ハンドル
-	int cloudImg[2];				//雲の画像ハンドル
+	int cloudImg;				//雲の画像ハンドル
 	int bardImg;					//鳥画像ハンドル
 	float bardImgX, bardImgY;		//鳥画像ハンドル座標
 	int resultBackImg;				//リザルト背景画像ハンドル
