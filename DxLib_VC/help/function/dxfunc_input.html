@@ -768,7 +768,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
         <tr><td>
         <table align="center" width="800"  cellspacing="0" cellpadding="0">
-            <tr><td valign="top" width="100"><b><a name="R5N30">宣言</a></b></td><td><font color="#000088"><b>int StartJoypadVibration( int InputType, int Power, int Time ) ;</b></font><br><br></td></tr>
+            <tr><td valign="top" width="100"><b><a name="R5N30">宣言</a></b></td><td><font color="#000088"><b>int StartJoypadVibration( int InputType, int Power, int Time, int EffectIndex ) ;</b></font><br><br></td></tr>
             <tr><td valign="top" width="100"><b>概略</b></td><td>ジョイパッドの振動を開始する<br><br></td></tr>
             <tr><td valign="top" width="100"><b>引数</b></td>
                 <td>InputType : 振動を開始するパッドの識別子<br>
@@ -778,15 +778,16 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
                     　　　　　　　　DX_INPUT_PAD4　　　　: パッド４<br>
                     Power : 振動の強さ(0～1000)<br>
                     Time : 振動させる時間(ミリ秒単位)<br>
-                    　　　　-1 で StopJoypadVibration が呼ばれるまで振動し続ける<br><br>
+                    　　　　-1 で StopJoypadVibration が呼ばれるまで振動し続ける<br>
+				    EffectIndex : 振動させるモーターの番号( -1 で自動処理 )<br><br>
             </tr>
             <tr><td valign="top" width="100"><b>戻り値</b></td><td>　０：成功</td></tr>
             <tr><td width="100">　</td><td>－１：エラー発生<br><br></td></tr>
             <tr>
                 <td valign="top" width="100"><b>解説</b></td>
-                <td>　ジョイパッドの中には振動機能がついているものがありますが、
-                この関数はその機能を使用してパッドを振動させたい時に使います。<br>
-                　振動機能のないパッドでは当然振動しません。<br><br>
+                <td>　ジョイパッドの中には振動機能がついているものがありますが、この関数はその機能を使用してパッドを振動させたい時に使います。<br>
+                　振動機能のないパッドでは当然振動しません。<br>
+				　第4引数 EffectIndex はジョイパッドの中に複数の振動モーターが搭載されている場合に、何番目のモーターを振動させるかを直接指定する際に使用します。通常は振動させるモーターを自動で処理する -1 を渡せば問題ありません。<br><br>
                 </td>
             </tr>
         </table></td></tr>
@@ -806,7 +807,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
          return -1;    // エラーが起きたら直ちに終了
 
     // 振動開始
-    StartJoypadVibration( DX_INPUT_PAD1, 1000, 2000 ) ;
+    StartJoypadVibration( DX_INPUT_PAD1, 1000, 2000, -1 ) ;
 
     // ２秒間経過するまで待つ
     WaitTimer( 2000 ) ;
@@ -823,7 +824,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
         <tr><td>
         <table align="center" width="800"  cellspacing="0" cellpadding="0">
-            <tr><td valign="top" width="100"><b><a name="R5N31">宣言</a></b></td><td><font color="#000088"><b>int StopJoypadVibration( int InputType ) ;</b></font><br><br></td></tr>
+            <tr><td valign="top" width="100"><b><a name="R5N31">宣言</a></b></td><td><font color="#000088"><b>int StopJoypadVibration( int InputType, int EffectIndex ) ;</b></font><br><br></td></tr>
             <tr><td valign="top" width="100"><b>概略</b></td><td>ジョイパッドの振動を停止する<br><br></td></tr>
             <tr><td valign="top" width="100"><b>引数</b></td>
                 <td>InputType : 振動を停止するパッドの識別子<br>
@@ -831,6 +832,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
                     　　　　　　　　DX_INPUT_PAD2　　　　: パッド２<br>
                     　　　　　　　　DX_INPUT_PAD3　　　　: パッド３<br>
                     　　　　　　　　DX_INPUT_PAD4　　　　: パッド４<br>
+				    EffectIndex : 振動を停止するモーターの番号( -1 で自動処理 )<br><br>
             </tr>
             <tr><td valign="top" width="100"><b>戻り値</b></td><td>　０：成功</td></tr>
             <tr><td width="100">　</td><td>－１：エラー発生<br><br></td></tr>
@@ -839,6 +841,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
                 <td>　<a href="#R5N30"><b>StartJoypadVibration</b></a>関数で開始した振動を停止します。<br>
                 　ただ、StartJoypadVibration 関数でも時間指定で自動的に振動を止めることは出来るので、
                 主に StartJoypadVibration 関数の時間指定で -1 を指定した場合に使用します。<br>
+				　第4引数 EffectIndex はジョイパッドの中に複数の振動モーターが搭載されている場合に、何番目のモーターの振動を停止させるかを指定する際に使用します。振動を開始する際に StartJoypadVibration で指定した値と同じ値を渡す必要があります。( -1 で振動を開始した場合は停止の際も -1 を、0 で振動を開始した場合は停止の際も 0 を渡す必要があります )<br><br>
                 </td>
             </tr>
         </table></td></tr>
@@ -933,7 +936,6 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
             <hr>
 	    <FONT COLOR="#0000ff"><B>Windows用</B></FONT>
 <pre><div class="NormalFont">#include "DxLib.h"
-#include &lt;stdlib.h&gt;
 
 int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow )
 {
@@ -961,22 +963,11 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
         // マウスの位置を取得
         GetMousePoint( &amp;MouseX , &amp;MouseY ) ;
 
-        // 表示する文字列を作成
-        {
-            lstrcpy( StrBuf , "座標 Ｘ" ) ; // 文字列"座標 Ｘ"をStrBufにコピー	
-            itoa( MouseX , StrBuf2 , 10 ) ; // MouseXの値を文字列にしてStrBuf2に格納
-            lstrcat( StrBuf , StrBuf2 ) ; // StrBufの内容にStrBuf2の内容を付け足す
-            lstrcat( StrBuf , "　Ｙ " ) ; // StrBufの内容に文字列"Ｙ"を付け足す
-            itoa( MouseY , StrBuf2 , 10 ) ; // MouseYの値を文字列にしてStrBuf2に格納
-            lstrcat( StrBuf , StrBuf2 ) ; // StrBufの内容にStrBuf2の内容を付け足す
-        }
-
-        // 画面左上の領域に黒い四角を描き前に描いてあった
-        // 文字列を消す
-        DrawBox( 0 , 0 , 200 , 32 , BoxCr , TRUE ) ;
+        // 画面左上の領域に黒い四角を描き前に描いてあった文字列を消す
+        DrawBox( 0 , 0 , 640 , 32 , BoxCr , TRUE ) ;
 
         // 座標文字列を描く
-        DrawString( 0 , 0 , StrBuf , StringCr ) ;
+        DrawFormatString( 0 , 0 , StringCr , "座標Ｘ %d　　座標Ｙ %d" , MouseX , MouseY ) ;
                 
         // メッセージ処理
         if( ProcessMessage() == -1 )
@@ -1566,6 +1557,10 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 		　タッチパネルのタッチされている箇所の数を取得するための関数です。<br>
 		　例えば人差し指でタッチパネルに１箇所だけ触れている場合は戻り値が１になり、中指も使って２箇所触れている場合は戻り値が２になります。<br>
 		　タッチパネルに触れていない場合は戻り値が０になります。<br><br>
+
+          <font color="#660000"><b>
+		注意！…この関数は定期的に関数 <a href="../dxfunc.html#R1N3">ProcessMessage</a> を呼ばないと機能しません。<br><br>
+          </b></font>
                 </td>
             </tr>
         </table></td></tr>
@@ -1656,6 +1651,10 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 		ID等が振られていないと前回の GetTouchInput で取得したタッチ箇所が移動したのか、
 		それとも別のタッチ箇所なのかを判別することができないからです )。<br>
 		　いらない情報については NULL を指定することができるので、IDやデバイス番号が不要な場合は NULL を引数として渡します。<br><br>
+          <font color="#660000"><b>
+		注意！…この関数は定期的に関数 <a href="../dxfunc.html#R1N3">ProcessMessage</a> を呼ばないと機能しません。<br><br>
+          </b></font>
+
                 </td>
             </tr>
         </table></td></tr>
@@ -1678,14 +1677,20 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
 
         <tr><td><table align="center" width="800"  cellspacing="0" cellpadding="0">
-            <tr><td valign="top" width="100"><b><a name="R5N1">宣言</a></b></td><td><font color="#000088"><b>int CheckHitKeyAll( void ) ;</b></font><br><br></td></tr>
-            <tr><td valign="top" width="100"><b>概略</b></td><td>すべてのキーの押下状態を取得する（キーの特定はできない）<br><br></td></tr>
-            <tr><td valign="top" width="100"><b>引数</b></td><td>なし</td></tr>
+            <tr><td valign="top" width="100"><b><a name="R5N1">宣言</a></b></td><td><font color="#000088"><b>int CheckHitKeyAll( int CheckType = DX_CHECKINPUT_ALL ) ;</b></font><br><br></td></tr>
+            <tr><td valign="top" width="100"><b>概略</b></td><td>すべてのキーの押下状態を取得する（キーの指定はできない）<br><br></td></tr>
+            <tr><td valign="top" width="100"><b>引数</b></td>
+                <td>CheckType : 押下状態をチェックする種類<br>
+					　　　　　　　DX_CHECKINPUT_KEY ： キー入力を調べる<br>
+					　　　　　　　DX_CHECKINPUT_PAD ： パッド入力を調べる<br>
+					　　　　　　　DX_CHECKINPUT_MOUSE ： マウスボタン入力を調べる<br>
+					　　　　　　　DX_CHECKINPUT_ALL ： すべての入力を調べる( デフォルト )<br><br></td>
+            </tr>
             <tr><td valign="top" width="100"><b>戻り値</b></td><td>　０：成功</td></tr>
             <tr><td width="100">　</td><td>－１：エラー発生<br><br></td></tr>
             <tr>
                 <td valign="top" width="100"><b>解説</b></td>
-                <td>　すべてのキーのどれかが押されているか判定し、結果を返します<br>
+                <td>　指定されたタイプのすべてのキーのどれかが押されているか判定し、結果を返します( 引数 CheckType は省略することが出来、その場合は DX_CHECKINPUT_ALL を指定した場合と同様の動作をします )。<br>
                     　この関数で特定のキーを判定する事は出来ません。特定のキー入力を判定するには次のCheckHitKey関数を使用してください。<br><br>
                 </td>
             </tr>

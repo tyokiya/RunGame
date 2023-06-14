@@ -67,6 +67,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	bool timeOverFlg = false;				//時間切れフラグ
 	int timeOverFrameCnt = 0;				//時間切れ時のフレーム数
 
+	bool resultSucoreFlg = false;			//リザルトのスコア描画フラグ
+
 	//////////////////////////////////////
 	/// 初期化処理
 	/////////////////////////////////////
@@ -230,8 +232,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		case ResultScene:
 			//リザルト処理
 
+			ResultUpdate(resultSucoreFlg,fps);
+
 			//描画処理
-			ResultDraw(&backGround,&gameSucore);
+			ResultDraw(&backGround,&gameSucore,resultSucoreFlg);
 			//プレイヤーの描画
 			PlayerDraw(&ply);
 

@@ -10,7 +10,19 @@ void ResultPlayerInit(Player* ply)
 	MV1SetRotationXYZ(ply->modelHandle, VGet(0.0f, -90.0f * DX_PI_F / 180.0f, 0.0f));
 }
 
-void ResultDraw(BackGround* back, Sucore* sucore)
+void ResultUpdate(bool flg, int fps)
+{
+	//ƒXƒRƒA‚Ì“_–Åƒtƒ‰ƒO‚ðØ‚è‘Ö‚¦
+	if (fps % 10 == 0)
+	{
+		if (flg == true)
+		{
+			flg = false;
+		}
+	}
+}
+
+void ResultDraw(BackGround* back, Sucore* sucore, bool flg)
 {
 	int n1, n2, n3, n4;
 	//ˆêŒ…“–‚½‚è‚Ì”‚ð‚Æ‚é
@@ -35,9 +47,13 @@ void ResultDraw(BackGround* back, Sucore* sucore)
 	//”wŒi•`‰æ
 	DrawExtendGraph(0, 0, 1200, 800, back->resultBackImg, true);
 	//ƒXƒRƒA•\Ž¦
-	//ˆêŒ…“–‚½‚è‚Ì•`‰æ
-	DrawExtendGraph(300, 300, 640, 640, sucore->sucoreImgHandl[n4 + 60], TRUE);
-	DrawExtendGraph(490, 300, 830, 640, sucore->sucoreImgHandl[n3 + 60], TRUE);
-	DrawExtendGraph(680, 300, 1020, 640, sucore->sucoreImgHandl[n2 + 60], TRUE);
-	DrawExtendGraph(870, 300, 1210, 640, sucore->sucoreImgHandl[n1 + 60], TRUE);
+	if (flg == true)
+	{
+		//ˆêŒ…“–‚½‚è‚Ì•`‰æ
+		DrawExtendGraph(300, 300, 640, 640, sucore->sucoreImgHandl[n4 + 60], TRUE);
+		DrawExtendGraph(490, 300, 830, 640, sucore->sucoreImgHandl[n3 + 60], TRUE);
+		DrawExtendGraph(680, 300, 1020, 640, sucore->sucoreImgHandl[n2 + 60], TRUE);
+		DrawExtendGraph(870, 300, 1210, 640, sucore->sucoreImgHandl[n1 + 60], TRUE);
+	}
+	
 }

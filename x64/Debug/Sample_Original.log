@@ -1,6 +1,2 @@
 ﻿  main.cpp
-C:\Users\tokiy\OneDrive\デスクトップ\gamecreate\RunGame\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3811,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-  timer.cpp
-C:\Users\tokiy\OneDrive\デスクトップ\gamecreate\RunGame\DxLib_VC\プロジェクトに追加すべきファイル_VC用\DxLib.h(3811,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-  コードを生成中...
-  Sample_Original.vcxproj -> C:\Users\tokiy\OneDrive\デスクトップ\gamecreate\RunGame\x64\Debug\Sample_Original.exe
+  Sample_Original.vcxproj -> C:\Users\student\Desktop\rungame\RunGame\x64\Debug\Sample_Original.exe

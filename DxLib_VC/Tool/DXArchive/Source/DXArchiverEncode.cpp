@@ -18,7 +18,7 @@
 #include <direct.h>
 
 // define -----------------------------
-#define VERSION			"1.08"				// バージョン
+#define VERSION			"1.09"				// バージョン
 #define FILETYPE		"dxa"				// 拡張子
 
 // code -------------------------------
@@ -28,6 +28,7 @@ int main( int argc, char *argv[] )
 {
 	char SrcPath[256], DestPath[256], *KeyString, *SrcDirectoryPath, *DestFilePath ;
 	bool Press ;
+	bool MaxPress ;
 	bool NoOutput ;
 	bool NoKey ;
 	bool AlwaysHuffman ;
@@ -40,6 +41,7 @@ int main( int argc, char *argv[] )
 	if( argc == 1 ) goto ERR ;
 
 	Press = true ;
+	MaxPress = false ;
 	NoOutput = false ;
 	NoKey = false ;
 	HuffmanSize = 10 ;
@@ -88,6 +90,11 @@ int main( int argc, char *argv[] )
 			AlwaysHuffman = true ;
 		}
 		else
+		if( argv[i][0] == '-' && argv[i][1] == 'M' && argv[i][2] == 'P' && argv[i][3] == '\0' )
+		{
+			MaxPress = true ;
+		}
+		else
 		if( SrcDirectoryPath == NULL )
 		{
 			SrcDirectoryPath = argv[i] ;
@@ -121,7 +128,7 @@ int main( int argc, char *argv[] )
 	}
 
 	// アーカイブファイルを作成する
-	DXArchive::EncodeArchiveOneDirectory( DestPath, SrcPath, Press, AlwaysHuffman, ( u8 )HuffmanSize, KeyString, NoKey, NoOutput ? false : true ) ;
+	DXArchive::EncodeArchiveOneDirectory( DestPath, SrcPath, Press, AlwaysHuffman, ( u8 )HuffmanSize, KeyString, NoKey, NoOutput ? false : true, MaxPress ) ;
 
 	// 終了
 	return 0 ;
@@ -138,6 +145,7 @@ ERR:
 	printf( "      デフォルトは10　　例  -H:20  ( 尚、-H:255 でファイル全体をハフマン圧縮 )\n" ) ;
 	printf( "・-AH 全てのファイルフォーマットをハフマン圧縮の対象とする\n" ) ;
 	printf( "      ( デフォルトでは png や wav などメジャーなファイルフォーマットのみ対象 )\n" ) ;
+	printf( "・-MP 独自圧縮の圧縮率を最大にする\n" ) ;
 	return -1; 
 }
 

@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="ja-JP">
 	<HEAD>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
@@ -22,7 +22,9 @@
 
 		　ここでは Androidアプリ開発に関するの基礎的な情報や注意点などを載せます。<BR><BR>
 
-		<A HREF="#R1">1.Androidアプリで使用するファイルの追加方法<BR><BR></A>
+		<A HREF="#R1">1.Androidアプリで使用するファイルの追加方法( Visual Studio編 )<BR><BR></A>
+
+		<A HREF="#R1_2">1-2.Androidアプリで使用するファイルの追加方法( Android Studio編 )<BR><BR></A>
 
 		<A HREF="#R2">2.Androidアプリで使用する文字コードは『UTF-8』であることについて<BR><BR></A>
 
@@ -36,7 +38,7 @@
 
 		<A NAME="R1">
 		<FONT COLOR="#008800">
-		1.Androidアプリで使用するファイルの追加方法<BR><BR>
+		1.Androidアプリで使用するファイルの追加方法( Visual Studio編 )<BR><BR>
 		</FONT>
 		</A>
 
@@ -113,6 +115,46 @@
 		　　　　　　改めてファイル・フォルダを追加する必要</FONT>があります。<BR><BR><BR><BR>
 
 
+		<A NAME="R1_2">
+		<FONT COLOR="#008800">
+		1-2.Androidアプリで使用するファイルの追加方法( Android Studio編 )<BR><BR>
+		</FONT>
+		</A>
+
+		 　 　Windowsソフトではソフトで使用する画像ファイルやサウンドファイルは実行ファイルと同じフォルダや、<BR>
+		　　実行ファイルと同じフォルダに置いたフォルダの中に配置したりしますが、Androidアプリはビルドすると<BR>
+		　　<FONT COLOR="#770000">拡張子 apk のファイルにアプリの実行に必要なファイルが全部入る</FONT>仕組みになっているため、<BR>
+		　　Windowsソフトと異なり Androidアプリはアプリ内で使用するファイルを <FONT COLOR="#770000">assetsフォルダ</FONT>に追加する必要があります。<BR><BR>
+
+		　　　まずは、ファイルを追加するための<FONT COLOR="#770000">『assets』フォルダ</FONT>を以下にその手順で追加します。<BR><BR>
+
+		<FONT COLOR="#550088">
+
+		　　①　Android Studio でプロジェクトを開いた状態で、画面左側のリストから<FONT COLOR="#770000">『app』</FONT>を右クリックして、プルダウンメニューを表示します。<BR><BR>
+
+		　　②　次にプルダウンメニューから<FONT COLOR="#770000">『New』→『Directory』</FONT>を選択します。<br><br>
+
+		　　③　<FONT COLOR="#770000">『New Directory』</FONT>ダイアログが開いたら、リストの中から<FONT COLOR="#770000">『src\main\assets』</FONT>をダブルクリックします。( src\main\assets はリストの結構下の方にあります )<br><br>
+
+		</FONT>
+
+		　　　上記手順で<FONT COLOR="#770000">『assets』</FONT>を追加するとプロジェクトのフォルダ以下の<FONT COLOR="#770000">『app\src\main』</FONT>フォルダに<FONT COLOR="#770000">『assets』</FONT>というフォルダが<br>
+		　　作成されますので、このフォルダの中にアプリで使用する画像ファイルや音ファイルをコピーしてください。<br>
+		　　　この<FONT COLOR="#770000">『assets』フォルダーにコピーしたファイルは Androidアプリの apkファイルに含まれる</FONT>ことになり、Androidアプリの<br>
+		　　プログラム内で <FONT COLOR="#770000">LoadGraph や LoadSoundMem などの関数を使用して読み込めるファイル</FONT>となります。<BR><BR>
+
+		　　あと、<FONT COLOR="#770000">『assets』</FONT>フォルダに含まれるファイルに関する<FONT COLOR="#770000">注意点や補足</FONT>は以下の通りです。<BR><BR><BR>
+
+		　　　　<FONT COLOR="#0000dd">LoadGraph や LoadSoundMem で参照されるフォルダは『assets』フォルダです</FONT><BR><BR>
+
+		　　　　　　つまり<FONT COLOR="#770000">『assets』</FONT>フォルダに<FONT COLOR="#770000">『Test.bmp』</FONT>というファイルを入れた場合、<FONT COLOR="#770000">LoadGraph</FONT> で読み込む際のパスは<BR>
+		　　　　　　<FONT COLOR="#770000">LoadGraph( "Test.bmp" ) ;</FONT> となります。( <FONT COLOR="#770000">LoadGraph( "assets\\Test.bmp" ) ; ではありません</FONT> )<BR><BR>
+
+		　　　　<FONT COLOR="#0000dd">Windowsソフトと異なり英語の大文字・小文字が区別されます</FONT><BR><BR>
+
+		　　　　　　<FONT COLOR="#770000">Windowsソフト</FONT>では『<FONT COLOR="#770000">Test.bmp</FONT>』というファイルを読み込む際は LoadGraph( "<FONT COLOR="#770000">test.bmp</FONT>" ) ; と記述しても<BR>
+		　　　　　　LoadGraph( "<FONT COLOR="#770000">TEST.BMP</FONT>" ) ; と記述しても正常に読み込むことができますが、<FONT COLOR="#770000">Androidアプリでは大文字と小文字は<BR>
+		　　　　　　区別される</FONT>ので正確に LoadGraph( "<FONT COLOR="#770000">Test.bmp</FONT>" ) ; と記述する必要があります。<BR><BR><br><br>
 
 		<A NAME="R2">
 		<FONT COLOR="#008800">

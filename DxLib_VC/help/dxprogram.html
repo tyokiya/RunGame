@@ -22,7 +22,7 @@
 			環境があれば実行することができますが。それを用意するのは面倒くさいとも思ったので<BR>
 			以下のファイルを用意しておきます。<BR><BR>
 
-			　<A HREF="https://dxlib.xsrv.jp/DxLib/DxSample3_21d.zip">サンプルプログラム実行用プロジェクト</A><BR><BR>
+			　<A HREF="https://dxlib.xsrv.jp/DxLib/DxSample3_24.zip">サンプルプログラム実行用プロジェクト</A><BR><BR>
 
 			　ダウンロードできるファイルは<font color="#770000">自己解凍形式の圧縮ファイル</font>となっていまして、実行すると<BR>
 			<font color="#770000">解凍先</font>を聞いてきますので適当な場所に解凍してください。<BR>
@@ -2389,8 +2389,6 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance,
 </B></FONT>
 <PRE><div class="NormalFont">// セーブ・ロード基本
 #include "DxLib.h"
-#include &lt;stdio.h&gt;	// ファイル操作に必要なヘッダファイル
-#include &lt;string.h&gt;	// 文字列操作に必要なヘッダファイル
 
 
 // ボタン押しカウンター
@@ -2572,14 +2570,8 @@ void HiScoreLoad( void )
 // 数値を画面に表示する関数
 void DrawNum( int x , int y , int Num )
 {
-	char StrBuf[ 80 ] ;
-
-	// 数値を１０進数文字列に変換
-	itoa( Num , StrBuf , 10 ) ;
-
-	// 画面に描画
-	DrawBox( x , y , x + strlen( StrBuf ) * 20 , y + 20 , 0 , TRUE ) ;
-	DrawString( x , y , StrBuf , GetColor( 255 , 255 , 255 ) ) ;
+	DrawBox( x , y , x + 16 * 20 , y + 20 , 0 , TRUE ) ;
+	DrawFormatString( x , y , GetColor( 255 , 255 , 255 ) , "%d" , Num ) ;
 }
 </div></PRE>
 <FONT SIZE="3" COLOR="#000000"><B>

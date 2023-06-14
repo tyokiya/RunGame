@@ -103,7 +103,15 @@
 	　　③　次に Xcode の右側に表示されたプロジェクトの設定から『Build Settings』を選択します。<BR><BR>
 
 	　　④　次に Build Settings の設定項目の中から『Search Paths』の中の『Header Search Paths』と『Library Search Paths』に<BR>
-	　　　　パッケージ内に入っている『プロジェクトに追加すべきファイル_iOS用』フォルダのパスを追加します。<BR><BR>
+	　　　　パッケージ内に入っている『プロジェクトに追加すべきファイル_iOS用』フォルダのパスの末尾に<br>
+	　　　　『/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)』を付けたパスを追加します。<BR>
+	　　　　( 例：『プロジェクトに追加すべきファイル_iOS用』のパスが<br>
+	　　　　　　　　/Users/user1/Downloads/DxLib_iOS/プロジェクトに追加すべきファイル_iOS用<br>
+	　　　　　だった場合は、<br>
+	　　　　　　　　/Users/user1/Downloads/DxLib_iOS/プロジェクトに追加すべきファイル_iOS用/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
+	　　　　　を追加 )<br>
+	　　　　( 表示タイプが『Basic』になっていると『Header Search Paths』や『Library Search Paths』が表示されませんので、<BR>
+	　　　　　この設定をする際は表示タイプを『All』に変更してください )<BR><BR>
 
 	　　⑤　次に同じく『Build Settings』の『Linking』の中の『Other Linker Flags』に以下の内容を入力します。<br><br>
 <FONT COLOR="#008800">

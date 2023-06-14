@@ -451,10 +451,10 @@ static void SetupCharCodeCP936TableInfo( void )
 			Src[ 0 ] = ( char )( ( i & 0xff00 ) >> 8 ) ;
 			Src[ 1 ] = ( char )( i & 0xff ) ;
 			Src[ 2 ] = 0 ;
-			if( ( ( u8 )Src[ 0 ] & 80 ) == 0 )
-			{
-				continue ;
-			}
+//			if( ( ( u8 )Src[ 0 ] & 80 ) == 0 )
+//			{
+//				continue ;
+//			}
 		}
 
 		result = MultiByteToWideChar( 936, MB_ERR_INVALID_CHARS, Src, -1, Dest, 8 ) ;
@@ -497,10 +497,10 @@ static void SetupCharCodeCP949TableInfo( void )
 			Src[ 0 ] = ( char )( ( i & 0xff00 ) >> 8 ) ;
 			Src[ 1 ] = ( char )( i & 0xff ) ;
 			Src[ 2 ] = 0 ;
-			if( ( ( u8 )Src[ 0 ] & 80 ) == 0 )
-			{
-				continue ;
-			}
+//			if( ( ( u8 )Src[ 0 ] & 80 ) == 0 )
+//			{
+//				continue ;
+//			}
 		}
 
 		result = MultiByteToWideChar( 949, MB_ERR_INVALID_CHARS, Src, -1, Dest, 8 ) ;
@@ -543,10 +543,10 @@ static void SetupCharCodeCP950TableInfo( void )
 			Src[ 0 ] = ( char )( ( i & 0xff00 ) >> 8 ) ;
 			Src[ 1 ] = ( char )( i & 0xff ) ;
 			Src[ 2 ] = 0 ;
-			if( ( ( u8 )Src[ 0 ] & 80 ) == 0 )
-			{
-				continue ;
-			}
+//			if( ( ( u8 )Src[ 0 ] & 80 ) == 0 )
+//			{
+//				continue ;
+//			}
 		}
 
 		result = MultiByteToWideChar( 950, MB_ERR_INVALID_CHARS, Src, -1, Dest, 8 ) ;

@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="ja-JP">
     <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
@@ -99,19 +99,15 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
             <tr><td valign="top" width="100"><b><a name="R18N2">宣言</a></b></td><td><font color="#000088">
             <b>int clsDx( void ) ;</b></font><br><br></td></tr>
             <tr><td valign="top" width="100"><b>概略</b></td><td>簡易画面出力履歴をクリアする<br><br></td></tr>
-            <tr><td valign="top" width="100"><b>引数</b></td>
-            <td>char *FormatString : 書式付き文字列のアドレス<br>
-                    ... : 書式付き文字列に付随する引数</td></tr>
+            <tr><td valign="top" width="100"><b>引数</b></td><td>なし</td></tr>
             <tr><td valign="top" width="100"><b>戻り値</b></td><td>　０：成功</td></tr>
             <tr><td width="100">　</td><td>－１：エラー発生<br><br></td></tr>
             <tr>
                 <td valign="top" width="100"><b>解説</b></td>
-                <td>　printfDx 関数で文字列を画面に表示しつづけるとやがて画面が
-                    文字でいっぱいになってしまい、とてもうっとうしくなります。<br>
+                <td>　printfDx 関数で文字列を画面に表示しつづけるとやがて画面が文字でいっぱいになってしまい、とてもうっとうしくなります。<br>
                     　そんなうっとうしい文字列達を一掃するのがこの関数す。<br><br>
 
-                    　なお、文字達を消す、とはいっても <a href="dxfunc_graph2.html#R17N1"><b>DrawString</b></a> 等の関数で
-                    描画された文字は消えませんのでご注意下さい。<br><br>
+                    　なお、文字達を消す、とはいっても <a href="dxfunc_graph2.html#R17N1"><b>DrawString</b></a> 等の関数で描画された文字は消えませんのでご注意下さい。<br><br>
                 </td>
             </tr>
         </table></td></tr>
@@ -306,6 +302,9 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
             <tr><td valign="top" width="100"><b>概略</b></td><td>フルスクリーンモード時の解像度モードを設定する<br><br></td></tr>
             <tr><td valign="top" width="100"><b>引数</b></td>
                 <td>ResolutionMode　:　フルスクリーンモード時の解像度モード<br>
+		    　　　　　DX_FSRESOLUTIONMODE_BORDERLESS_WINDOW<br>
+		    　　　　　　　　デスクトップ画面と同じ大きさのウィンドウを生成して擬似的にフルスクリーンにするモード<br><br>
+
 		    　　　　　DX_FSRESOLUTIONMODE_NATIVE<br>
 		    　　　　　　　　モニターの解像度を <a href="#R4N1"><b>SetGraphMode</b></a> で指定した解像度に変更するモード<br><br>
 
@@ -324,13 +323,27 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
                 <td>
 		　フルスクリーンモードで実行する場合の画面解像度の決定に関する動作モードを設定する関数です。<br><br>
 
+		　　DX_FSRESOLUTIONMODE_BORDERLESS_WINDOW<br>
+		　　　　モニターの解像度は変更せず、縁無しウィンドウのサイズをデスクトップ画面と同じにすることで画面を<br>
+		　　　　ウィンドウで覆い、擬似的にフルスクリーンにするモードです。<br><br>
+
+		　　　　厳密にはウィンドウモードなので、フォーカスが他のソフトに移っても画面モードの切り替えが発生しません。<br>
+		　　　　そのため画面モード切り変えの待ち時間が無く、また、画面解像度変更などに伴うデスクトップ画面内の<br>
+		　　　　アイコンの配置が変わってしまう等の現象も発生しないのが利点となります。<br><br>
+
+		　　　　ただ、欠点としてデスクトップ画面のサイズが SetGraphMode で指定した解像度より小さい場合は<br>
+		　　　　デスクトップ画面のサイズに縮小して表示されます。<br><br>
+
+		　　　　デフォルトではこのモードになっています。<br><br><br>
+
+
 		　　DX_FSRESOLUTIONMODE_NATIVE<br>
 		　　　　モニターの解像度を <a href="#R4N1"><b>SetGraphMode</b></a> で指定した解像度に変更します。<br><br>
 
 		　　　　モニターが SetGraphMode で指定した解像度に対応していない場合は、<br>
 		　　　　DX_FSRESOLUTIONMODE_DESKTOP と同じ動作をします。<br><br>
 
-		　　　　モニターが SetGraphMode で指定した解像度に対応している場合は、<a href="dxfunc_graph3.html#R4N7"><b>ScreenFlip</b></a> が３種類の<br>
+		　　　　モニターが SetGraphMode で指定した解像度に対応している場合は、<a href="dxfunc_graph3.html#R4N7"><b>ScreenFlip</b></a> が４種類の<br>
 		　　　　モードの中で最も高速に動作します。<br><br><br>
 
 
@@ -349,9 +362,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
 		　　　　ただ、SetGraphMode で指定した解像度の画面をデスクトップ画面の解像度に拡大する処理が<br>
 		　　　　実行されるので、ScreenFlip の動作速度は DX_FSRESOLUTIONMODE_NATIVE よりも<br>
-		　　　　遅くなります。<br><br>
-
-		　　　　デフォルトではこのモードになっています。<br><br><br>
+		　　　　遅くなります。<br><br><br>
 
 
 		　　DX_FSRESOLUTIONMODE_MAXIMUM<br>
@@ -363,7 +374,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 		　　　　四角く表示されます。<br><br>
 
 		　　　　ただ、SetGraphMode で指定した解像度の画面をモニターの最大解像度に拡大する処理が実行<br>
-		　　　　されるので、ScreenFlip の動作速度は３つのモードの中で最も遅くなります。<br><br><br>
+		　　　　されるので、ScreenFlip の動作速度は４種類のモードの中で最も遅くなります。<br><br><br>
 
 
                 <font color="#a00000">
@@ -431,7 +442,8 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
             <tr>
                 <td valign="top" width="100"><b>解説</b></td>
                 <td>
-		　フルスクリーンモードで <a href="#R4N1"><b>SetGraphMode</b></a> で指定した解像度とモニターの解像度が一致していない場合に行われる画面拡大処理での拡大処理方式を設定する関数です。<br><br>
+		　フルスクリーンモードで <a href="#R4N1"><b>SetGraphMode</b></a> で指定した解像度とモニターの解像度が一致していない場合に行われる画面拡大処理での拡大処理方式を設定する関数です。<br>
+		　( <font color="#a00000">尚、ウィンドウが拡大して表示される際もこちらの設定が適用されます</font> )<br><br>
 
 		　　DX_FSSCALINGMODE_BILINEAR<br>
 		　　　　バイリニア補間による拡大処理を行います。ピクセルとピクセルの区切りがぼやけます。<br><br>
@@ -663,6 +675,28 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 </div></pre>
             <hr><br><br><br>
         </td></tr>
+
+
+
+        <tr><td><table align="center" width="800"  cellspacing="0" cellpadding="0">
+            <tr><td valign="top" width="100"><b><a name="R4N12">宣言</a></b></td><td><font color="#000088"><b>int ClearDrawScreenZBuffer( void ) ;</b></font><br><br></td></tr>
+            <tr><td valign="top" width="100"><b>概略</b></td><td>深度バッファをクリアする<br><br></td></tr>
+            <tr><td valign="top" width="100"><b>引数</b></td><td>なし</td></tr>
+            <tr><td valign="top" width="100"><b>戻り値</b></td><td>　０：成功</td></tr>
+            <tr><td width="100">　</td><td>－１：エラー発生<br><br></td></tr>
+            <tr>
+                <td valign="top" width="100"><b>解説</b></td>
+                <td>　<a href="dxfunc_graph3.html#R4N4"><b>ClearDrawScreen</b></a> はカラーバッファ( 実際に画面に表示される絵の情報 )と深度バッファ( ３Ｄの描画物同士の前後関係の判定に使用される情報 )のどちらもクリアをしますが、この関数は深度バッファのみをクリアします。<br><br> </td>
+            </tr>
+        </table></td></tr>
+
+        <tr><td>
+            <b>サンプル</b><br><br>
+
+                　ありません<br>
+            <br><br><br><br>
+        </td></tr>
+
 
 
         <tr><td><table align="center" width="800"  cellspacing="0" cellpadding="0">

@@ -190,8 +190,8 @@ public :
 	DXArchive( char *ArchivePath = NULL ) ;
 	~DXArchive() ;
 
-	static int			EncodeArchive( char *OutputFileName, char **FileOrDirectoryPath, int FileNum, bool Press = false, bool AlwaysHuffman = false, u8 HuffmanEncodeKB = 0, const char *KeyString_ = NULL, bool NoKey = false, bool OutputStatus = true ) ;	// アーカイブファイルを作成する
-	static int			EncodeArchiveOneDirectory( char *OutputFileName, char *FolderPath, bool Press = false, bool AlwaysHuffman = false, u8 HuffmanEncodeKB = 0, const char *KeyString_ = NULL, bool NoKey = false, bool OutputStatus = true ) ;		// アーカイブファイルを作成する(ディレクトリ一個だけ)
+	static int			EncodeArchive( char *OutputFileName, char **FileOrDirectoryPath, int FileNum, bool Press = false, bool AlwaysHuffman = false, u8 HuffmanEncodeKB = 0, const char *KeyString_ = NULL, bool NoKey = false, bool OutputStatus = true, bool MaxPress = false ) ;	// アーカイブファイルを作成する
+	static int			EncodeArchiveOneDirectory( char *OutputFileName, char *FolderPath, bool Press = false, bool AlwaysHuffman = false, u8 HuffmanEncodeKB = 0, const char *KeyString_ = NULL, bool NoKey = false, bool OutputStatus = true, bool MaxPress = false ) ;		// アーカイブファイルを作成する(ディレクトリ一個だけ)
 	static int			DecodeArchive( char *ArchiveName, char *OutputPath, const char *KeyString_ = NULL ) ;								// アーカイブファイルを展開する
 
 	int					OpenArchiveFile( const char *ArchivePath, const char *KeyString_ = NULL ) ;				// アーカイブファイルを開く( 0:成功  -1:失敗 )
@@ -225,7 +225,7 @@ public :
 	static void KeyConvFileWrite( void *Data, s64 Size, FILE *fp, unsigned char *Key, s64 Position = -1 ) ;		// データを鍵文字列を使用して Xor 演算した後ファイルに書き出す関数( Key は必ず DXA_KEY_BYTES の長さがなければならない )
 	static void KeyConvFileRead( void *Data, s64 Size, FILE *fp, unsigned char *Key, s64 Position = -1 ) ;		// ファイルから読み込んだデータを鍵文字列を使用して Xor 演算する関数( Key は必ず DXA_KEY_BYTES の長さがなければならない )
 	static DATE_RESULT DateCmp( DARC_FILETIME *date1, DARC_FILETIME *date2 ) ;									// どちらが新しいかを比較する
-	static int Encode( void *Src, u32 SrcSize, void *Dest, bool OutStatus = true ) ;							// データを圧縮する( 戻り値:圧縮後のデータサイズ )
+	static int Encode( void *Src, u32 SrcSize, void *Dest, bool OutStatus = true, bool MaxPress = false ) ;		// データを圧縮する( 戻り値:圧縮後のデータサイズ )
 	static int Decode( void *Src, void *Dest ) ;																// データを解凍する( 戻り値:解凍後のデータサイズ )
 	static u32 HashCRC32( const void *SrcData, size_t SrcDataSize ) ;											// バイナリデータを元に CRC32 のハッシュ値を計算する
 
@@ -277,7 +277,7 @@ protected :
 		u16 PackNum ;
 	} SEARCHDATA ;
 
-	static int DirectoryEncode( int CharCodeFormat, char *DirectoryName, u8 *NameP, u8 *DirP, u8 *FileP, DARC_DIRECTORY *ParentDir, SIZESAVE *Size, int DataNumber, FILE *DestFp, void *TempBuffer, bool Press, bool AlwaysHuffman, u8 HuffmanEncodeKB, const char *KeyString, size_t KeyStringBytes, bool NoKey, char *KeyStringBuffer, DARC_ENCODEINFO *EncodeInfo ) ;	// 指定のディレクトリにあるファイルをアーカイブデータに吐き出す
+	static int DirectoryEncode( int CharCodeFormat, char *DirectoryName, u8 *NameP, u8 *DirP, u8 *FileP, DARC_DIRECTORY *ParentDir, SIZESAVE *Size, int DataNumber, FILE *DestFp, void *TempBuffer, bool Press, bool MaxPress, bool AlwaysHuffman, u8 HuffmanEncodeKB, const char *KeyString, size_t KeyStringBytes, bool NoKey, char *KeyStringBuffer, DARC_ENCODEINFO *EncodeInfo ) ;	// 指定のディレクトリにあるファイルをアーカイブデータに吐き出す
 	static int DirectoryDecode( u8 *NameP, u8 *DirP, u8 *FileP, DARC_HEAD *Head, DARC_DIRECTORY *Dir, FILE *ArcP, unsigned char *Key, const char *KeyString, size_t KeyStringBytes, bool NoKey, char *KeyStringBuffer ) ;											// 指定のディレクトリデータにあるファイルを展開する
 	static int StrICmp( const char *Str1, const char *Str2 ) ;							// 比較対照の文字列中の大文字を小文字として扱い比較する( 0:等しい  1:違う )
 	static int ConvSearchData( SEARCHDATA *Dest, const char *Src, int *Length ) ;		// 文字列を検索用のデータに変換( ヌル文字か \ があったら終了 )

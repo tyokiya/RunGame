@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="ja-JP">
     <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
@@ -834,7 +834,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
                     　TransFlagをTRUEにすると画像の透明度が有効になります。<br>
 		    ( 画像の透明度の詳細については <a href="#R15N7"><b>SetTransColor</b></a> の解説を参照してください )<br><br>
                     <font color="#800000"><b>
-                    注…『なんで右下の頂点は「-1」してるの？』と思われた方は<a href="#R2N2">DrawBox</a>の解説を読んでみて下さい。
+                    注…『なんで右下の頂点は「-1」してるの？』と思われた方は<a href="dxfunc_graph0.html#R2N2">DrawBox</a>の解説を読んでみて下さい。
                     </b></font>
                 </td>
             </tr>
@@ -1143,7 +1143,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 		    ( 画像の透明度の詳細については <a href="#R15N7"><b>SetTransColor</b></a> の解説を参照してください )<br><br>
 
                     <font color="#800000"><b>
-                    注…『なんで右側、下側の座標は「-1」してるの？』と思われた方は<a href="#R2N2">DrawBox</a>の解説を読んでみて下さい。
+                    注…『なんで右側、下側の座標は「-1」してるの？』と思われた方は<a href="dxfunc_graph0.html#R2N2">DrawBox</a>の解説を読んでみて下さい。
                     </b></font>
                 </td>
             </tr>
@@ -1598,7 +1598,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
                     グラフィックのサイズは同じでなければなりません<br><br>
                     <font color="#800000"><b>
                     注１…この関数で取り込んだ画像は、透過色の機能が正常に動作しませんのでご注意ください。<br>
-                    注２…『なんで右下の頂点は「-1」してるの？』と思われた方は<a href="#R2N2">DrawBox</a>の解説を読んでみて下さい。<br>
+                    注２…『なんで右下の頂点は「-1」してるの？』と思われた方は<a href="dxfunc_graph0.html#R2N2">DrawBox</a>の解説を読んでみて下さい。<br>
                     </b></font>
                 </td>
             </tr>
@@ -1979,8 +1979,8 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
                 <td valign="top" width="100"><b>解説</b></td>
                 <td>　<a href="#R3N7"><b>DrawGraph</b></a>、<a href="#R3N9"><b>DrawExtendGraph</b></a>、
                     <a href="#R3N10"><b>DrawRotaGraph</b></a>、<a href="#R3N11"><b>DrawModiGraph</b></a>、<a href="#R3N8"><b>DrawTurnGraph</b></a>、
-                    <a href="#R2N1"><b>DrawLine</b></a>、<a href="#R2N2"><b>DrawBox</b></a>、
-                    <a href="#R2N3"><b>DrawCircle</b></a>,<a href="#R2N4"><b>DrawPixel</b></a>
+                    <a href="dxfunc_graph0.html#R2N1"><b>DrawLine</b></a>、<a href="dxfunc_graph0.html#R2N2"><b>DrawBox</b></a>、
+                    <a href="dxfunc_graph0.html#R2N3"><b>DrawCircle</b></a>,<a href="dxfunc_graph0.html#R2N5"><b>DrawPixel</b></a>
                     <a href="dxfunc_graph2.html#R17N1"><b>DrawString</b></a> を使用したときの描画先に
                     元からある画像とのブレンドを行うか等の設定を行います。<br><br>
 
@@ -2030,7 +2030,8 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 		　『乗算済みα』についてはこちらの解説をご参照ください。<br>
 		　<a href="../lecture/PremulAlpha/PremulAlpha.html">『乗算済みアルファのすすめ』</a><br><br><br><br>
 
-                    　それぞれエフェクト等を行う用途によって変更してください。<br><br>
+                    　それぞれエフェクト等を行う用途によって変更してください。<br>
+                    　また、SetDrawBlendMode とは別に、Direct3D のブレンド設定のような感覚で設定を行える関数 <b><a href="dxfunc_other.html#R15N39">SetDrawCustomBlendMode</a></b> もあります。<br><br>
                 </td>
             </tr>
         </table></td></tr>

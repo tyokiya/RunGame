@@ -622,7 +622,7 @@ void DXArchive::KeyConvFileRead( void *Data, s64 Size, FILE *fp, unsigned char *
 }
 
 // 指定のディレクトリにあるファイルをアーカイブデータに吐き出す
-int DXArchive::DirectoryEncode( int CharCodeFormat, char *DirectoryName, u8 *NameP, u8 *DirP, u8 *FileP, DARC_DIRECTORY *ParentDir, SIZESAVE *Size, int DataNumber, FILE *DestFp, void *TempBuffer, bool Press, bool AlwaysHuffman, u8 HuffmanEncodeKB, const char *KeyString, size_t KeyStringBytes, bool NoKey, char *KeyStringBuffer, DARC_ENCODEINFO *EncodeInfo )
+int DXArchive::DirectoryEncode( int CharCodeFormat, char *DirectoryName, u8 *NameP, u8 *DirP, u8 *FileP, DARC_DIRECTORY *ParentDir, SIZESAVE *Size, int DataNumber, FILE *DestFp, void *TempBuffer, bool Press, bool MaxPress, bool AlwaysHuffman, u8 HuffmanEncodeKB, const char *KeyString, size_t KeyStringBytes, bool NoKey, char *KeyStringBuffer, DARC_ENCODEINFO *EncodeInfo )
 {
 	char DirPath[MAX_PATH] ;
 	WIN32_FIND_DATAA FindData ;
@@ -716,7 +716,7 @@ int DXArchive::DirectoryEncode( int CharCodeFormat, char *DirectoryName, u8 *Nam
 			if( FindData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY )
 			{
 				// ディレクトリだった場合の処理
-				if( DirectoryEncode( CharCodeFormat, FindData.cFileName, NameP, DirP, FileP, &Dir, Size, i, DestFp, TempBuffer, Press, AlwaysHuffman, HuffmanEncodeKB, KeyString, KeyStringBytes, NoKey, KeyStringBuffer, EncodeInfo ) < 0 ) return -1 ;
+				if( DirectoryEncode( CharCodeFormat, FindData.cFileName, NameP, DirP, FileP, &Dir, Size, i, DestFp, TempBuffer, Press, MaxPress, AlwaysHuffman, HuffmanEncodeKB, KeyString, KeyStringBytes, NoKey, KeyStringBuffer, EncodeInfo ) < 0 ) return -1 ;
 			}
 			else
 			{
@@ -862,7 +862,7 @@ int DXArchive::DirectoryEncode( int CharCodeFormat, char *DirectoryName, u8 *Nam
 						}
 
 						// 圧縮
-						DestSize = Encode( SrcBuf, ( u32 )FileSize, DestBuf, EncodeInfo->OutputStatus ) ;
+						DestSize = Encode( SrcBuf, ( u32 )FileSize, DestBuf, EncodeInfo->OutputStatus, MaxPress ) ;
 						
 						// 殆ど圧縮出来なかった場合は圧縮無しでアーカイブする
 						if( AlwaysPress == false && ( (f64)DestSize / (f64)FileSize > 0.90 ) )
@@ -1389,7 +1389,7 @@ void DXArchive::AnalyseHuffmanEncode( u64 DataSize, u8 HuffmanEncodeKB, u64 *Hea
 }
 
 // エンコード( 戻り値:圧縮後のサイズ  -1 はエラー  Dest に NULL を入れることも可能 )
-int DXArchive::Encode( void *Src, u32 SrcSize, void *Dest, bool OutStatus )
+int DXArchive::Encode( void *Src, u32 SrcSize, void *Dest, bool OutStatus, bool MaxPress )
 {
 	s32 dstsize ;
 	s32    bonus,    conbo,    conbosize,    address,    addresssize ;
@@ -1402,7 +1402,11 @@ int DXArchive::Encode( void *Src, u32 SrcSize, void *Dest, bool OutStatus )
 	u32 sublistnum, sublistmaxnum ;
 	LZ_LIST *listbuf, *listtemp, *list, *newlist ;
 	u8 *listfirsttable, *usesublistflagtable, *sublistbuf ;
-	
+	u32 searchlistnum ;
+
+	// 最大一致長を捜すためのリストを辿る最大数のセット
+	searchlistnum = MaxPress ? 0xffffffff : MAX_SEARCHLISTNUM ;
+
 	// サブリストのサイズを決める
 	{
 			 if( SrcSize < 100 * 1024 )			sublistmaxnum = 1 ;
@@ -1534,7 +1538,7 @@ int DXArchive::Encode( void *Src, u32 SrcSize, void *Dest, bool OutStatus )
 		maxconbo   = -1 ;
 		maxaddress = -1 ;
 		maxbonus   = -1 ;
-		for( m = 0, listtemp = list->next ; m < MAX_SEARCHLISTNUM && listtemp != NULL ; listtemp = listtemp->next, m ++ )
+		for( m = 0, listtemp = list->next ; m < searchlistnum && listtemp != NULL ; listtemp = listtemp->next, m ++ )
 		{
 			address = srcaddress - listtemp->address ;
 			if( address >= MAX_POSITION )
@@ -1912,7 +1916,7 @@ u32 DXArchive::HashCRC32( const void *SrcData, size_t SrcDataSize )
 
 
 // アーカイブファイルを作成する(ディレクトリ一個だけ)
-int DXArchive::EncodeArchiveOneDirectory( char *OutputFileName, char *DirectoryPath, bool Press, bool AlwaysHuffman, u8 HuffmanEncodeKB, const char *KeyString_, bool NoKey, bool OutputStatus )
+int DXArchive::EncodeArchiveOneDirectory( char *OutputFileName, char *DirectoryPath, bool Press, bool AlwaysHuffman, u8 HuffmanEncodeKB, const char *KeyString_, bool NoKey, bool OutputStatus, bool MaxPress )
 {
 	int i, FileNum, Result ;
 	char **FilePathList, *NameBuffer ;
@@ -1933,7 +1937,7 @@ int DXArchive::EncodeArchiveOneDirectory( char *OutputFileName, char *DirectoryP
 		FilePathList[i] = NameBuffer + i * 256 ;
 	
 	// エンコード
-	Result = EncodeArchive( OutputFileName, FilePathList, FileNum, Press, AlwaysHuffman, HuffmanEncodeKB, KeyString_, NoKey, OutputStatus ) ;
+	Result = EncodeArchive( OutputFileName, FilePathList, FileNum, Press, AlwaysHuffman, HuffmanEncodeKB, KeyString_, NoKey, OutputStatus, MaxPress ) ;
 
 	// 確保したメモリの解放
 	free( NameBuffer ) ;
@@ -1943,7 +1947,7 @@ int DXArchive::EncodeArchiveOneDirectory( char *OutputFileName, char *DirectoryP
 }
 
 // アーカイブファイルを作成する
-int DXArchive::EncodeArchive( char *OutputFileName, char **FileOrDirectoryPath, int FileNum, bool Press, bool AlwaysHuffman, u8 HuffmanEncodeKB, const char *KeyString_, bool NoKey, bool OutputStatus )
+int DXArchive::EncodeArchive( char *OutputFileName, char **FileOrDirectoryPath, int FileNum, bool Press, bool AlwaysHuffman, u8 HuffmanEncodeKB, const char *KeyString_, bool NoKey, bool OutputStatus, bool MaxPress )
 {
 	DARC_HEAD Head ;
 	DARC_DIRECTORY Directory, *DirectoryP ;
@@ -2102,7 +2106,7 @@ int DXArchive::EncodeArchive( char *OutputFileName, char **FileOrDirectoryPath, 
 		if( ( Type & FILE_ATTRIBUTE_DIRECTORY ) != 0 )
 		{
 			// ディレクトリの場合はディレクトリのアーカイブに回す
-			DirectoryEncode( ( int )Head.CharCodeFormat, FileOrDirectoryPath[i], NameP, DirP, FileP, &Directory, &SizeSave, i, DestFp, TempBuffer, Press, AlwaysHuffman, HuffmanEncodeKB, KeyString, KeyStringBytes, NoKey, KeyStringBuffer, &EncodeInfo ) ;
+			DirectoryEncode( ( int )Head.CharCodeFormat, FileOrDirectoryPath[i], NameP, DirP, FileP, &Directory, &SizeSave, i, DestFp, TempBuffer, Press, MaxPress, AlwaysHuffman, HuffmanEncodeKB, KeyString, KeyStringBytes, NoKey, KeyStringBuffer, &EncodeInfo ) ;
 		}
 		else
 		{
@@ -2258,7 +2262,7 @@ int DXArchive::EncodeArchive( char *OutputFileName, char **FileOrDirectoryPath, 
 					}
 					
 					// 圧縮
-					DestSize = Encode( SrcBuf, ( u32 )FileSize, DestBuf, EncodeInfo.OutputStatus ) ;
+					DestSize = Encode( SrcBuf, ( u32 )FileSize, DestBuf, EncodeInfo.OutputStatus, MaxPress ) ;
 					
 					// 殆ど圧縮出来なかった場合は圧縮無しでアーカイブする
 					if( AlwaysPress == false && ( (f64)DestSize / (f64)FileSize > 0.90 ) )
