@@ -54,7 +54,7 @@ void CollisionJudgement(CollisionCircle* plyCircle, CollisionCircle* obstacleCir
 		ply->displayFlg = false;
 		obstacle->displayFlg = false;
 		//スコアの減点
-		SucoreDow(sucore);
+		SucoreDown(sucore);
 		//死亡サウンド再生
 		PlaySoundMem(ply->deatSound, DX_PLAYTYPE_BACK);
 	}

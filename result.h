@@ -10,7 +10,7 @@ struct Sucore;
 /// <param name="ply">プレイヤー構造体のポインタ</param>
 void ResultPlayerInit(Player* ply);
 
-void ResultUpdate(bool flg,int fps);
+void ResultUpdate(bool& flg,int fps);
 
 /// <summary>
 /// リザルト背景描画

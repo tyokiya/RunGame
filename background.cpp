@@ -6,12 +6,23 @@
 void BackGroundInit(BackGround* back)
 {
 	//”wŒiİ’è
-	back->backImg = LoadGraph("img/backImg/sky.jpg");
+	back->backImg = LoadGraph("img/backImg/blue.jpg");
 	back->resultBackImg = LoadGraph("img/backImg/resultBack.png");
 	//“¹‰æ‘œİ’è
 	back->roadImg = LoadGraph("img/backImg/gras.jpg");
 	//’¹‰æ‘œİ’è
 	back->bardImg = LoadGraph("img/backImg/bard.png");
+
+	//‰_‰æ‘œİ’è
+	for (int i = 0; i < 2; i++)
+	{
+		back->cloudImg[i] = LoadGraph("img/backImg/cloud.png");
+	}
+	//‰_À•Wİ’è
+	for (int i = 0; i < 2; i++)
+	{
+		//back->cloudImgPos[i] = 
+	}
 
 	//’¹‚ÌÀ•W‚¹‚Á‚Ä‚¢
 	back->bardImgX = 1200;

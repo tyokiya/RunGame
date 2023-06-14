@@ -104,17 +104,22 @@ void TotalSucoreDraw(Sucore* sucore)
 		n4 = 0;}
 
 	//一桁当たりの描画
-	DrawExtendGraph(0, 0, 40, 40, sucore->sucoreImgHandl[n4 + 60], TRUE);
-	DrawExtendGraph(30, 0, 70, 40, sucore->sucoreImgHandl[n3 + 60], TRUE);
-	DrawExtendGraph(60, 0, 100, 40, sucore->sucoreImgHandl[n2 + 60], TRUE);
-	DrawExtendGraph(90, 0, 130, 40, sucore->sucoreImgHandl[n1 + 60], TRUE);
+	DrawExtendGraph(10, 20, 50, 60, sucore->sucoreImgHandl[n4 + 60], TRUE);
+	DrawExtendGraph(40, 20, 80, 60, sucore->sucoreImgHandl[n3 + 60], TRUE);
+	DrawExtendGraph(70, 20, 110, 60, sucore->sucoreImgHandl[n2 + 60], TRUE);
+	DrawExtendGraph(100, 20, 140, 60, sucore->sucoreImgHandl[n1 + 60], TRUE);
 }
 
-void SucoreDow(Sucore* sucore)
+void SucoreDown(Sucore* sucore)
 {
 	//スコアの減点
 	if (sucore->nowScore > 1)
 	{
 		sucore->nowScore -= DOWN_SUCORE;
+	}
+	//0未満にならないようにする
+	if (sucore->nowScore < 0)
+	{
+		sucore->nowScore = 0;
 	}
 }

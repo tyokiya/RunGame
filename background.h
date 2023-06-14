@@ -6,9 +6,11 @@ struct BackGround
 {
 	int backImg;					//背景画像ハンドル
 	int roadImg;					//道画像ハンドル
+	int cloudImg[2];				//雲の画像ハンドル
 	int bardImg;					//鳥画像ハンドル
 	float bardImgX, bardImgY;		//鳥画像ハンドル座標
 	int resultBackImg;				//リザルト背景画像ハンドル
+	float cloudImgX, cloudImgY;		//雲画像の座標
 };
 
 /// <summary>

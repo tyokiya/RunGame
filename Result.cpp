@@ -10,14 +10,18 @@ void ResultPlayerInit(Player* ply)
 	MV1SetRotationXYZ(ply->modelHandle, VGet(0.0f, -90.0f * DX_PI_F / 180.0f, 0.0f));
 }
 
-void ResultUpdate(bool flg, int fps)
+void ResultUpdate(bool& flg, int fps)
 {
 	//スコアの点滅フラグを切り替え
-	if (fps % 10 == 0)
+	if (fps % 20 == 0)
 	{
 		if (flg == true)
 		{
 			flg = false;
+		}
+		else
+		{
+			flg = true;
 		}
 	}
 }

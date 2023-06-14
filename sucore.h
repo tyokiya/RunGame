@@ -52,5 +52,5 @@ void TotalSucoreDraw(Sucore* sucore);
 /// スコアの減点
 /// </summary>
 /// <param name="sucore">得点判定構造体のポインタ</param>
-void SucoreDow(Sucore* sucore);
+void SucoreDown(Sucore* sucore);
 

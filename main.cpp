@@ -42,6 +42,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	//////////////////////////////////////////
 	/// 構造体宣言
 	///////////////////////////////////////////
+	//タイトル素材
+	TitlleMaterial tittleMaterial;
 	//プレヤー
 	Player ply;
 	//障害物
@@ -72,6 +74,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	//////////////////////////////////////
 	/// 初期化処理
 	/////////////////////////////////////
+	TittleInit(tittleMaterial);
 	PlayerInit(&ply);			
 	ObstacleInit(&obstacle, MV1LoadModel("img/obstacle/block1.mv1"));	
 	ObstacleBeeInit(&obstacleBee, MV1LoadModel("img/obstacle/Bee.mv1"));
@@ -104,13 +107,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			//タイトル処理
 
 			//情報更新
-			TittleUpdate(&ply, &obstacle, fps);
+			TittleUpdate(&ply, &obstacle, fps, tittleMaterial);
 
 			//描画
 			BackGroundDraw(&backGround);
 			PlayerDraw(&ply);
 			ObstacleDraw(&obstacle);
 			TittleTextDraw(tittleTextFlg);
+			TittleEffectDraw(tittleMaterial);
 			//5フレームごとにフラグ更新
 			if (fps % 20 == 0)
 			{
@@ -238,6 +242,18 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			ResultDraw(&backGround,&gameSucore,resultSucoreFlg);
 			//プレイヤーの描画
 			PlayerDraw(&ply);
+
+			//キー入力でシーン切り替え
+			if (CheckHitKey(KEY_INPUT_SPACE) == 1)
+			{
+				ReSutartInit()
+				//fps初期化
+				fps = 0;
+				//シーン切り替え
+				nowGameScene = PlayScene;
+				//障害物の最初期化
+				ObstacleInit(&obstacle, MV1LoadModel("img/obstacle/block1.mv1"));
+			}
 
 			break;
 		default:
