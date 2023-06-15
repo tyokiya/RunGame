@@ -105,7 +105,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 			//情報更新
 			TittleUpdate(&ply, &obstacle, fps, tittleMaterial);
-
+			BackGroundUpdate(&backGround);
 			//描画
 			BackGroundDraw(&backGround);
 			PlayerDraw(&ply);
@@ -135,6 +135,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 				//障害物の再初期化
 				ObstacleInit(&obstacle, MV1LoadModel("img/obstacle/block1.mv1"));
 				CollisionCircleInit(&obstacleCollision, obstacle.pos, OBSTACLE_RADIUS);
+				//プレイヤー座標セット
+				PlayerInit(&ply);
 			}
 			break;
 

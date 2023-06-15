@@ -53,7 +53,12 @@ void ResultDraw(BackGround* back, Sucore* sucore, bool flg)
 	//ƒXƒRƒA•\Ž¦
 	if (flg == true)
 	{
-		//ˆêŒ…“–‚½‚è‚Ì•`‰æ
+		////ˆêŒ…“–‚½‚è‚Ì•`‰æ
+		//DrawRotaGraph(300, 300, 1, 0, sucore->sucoreImgHandl[n4 + 60], TRUE,FALSE);
+		//DrawRotaGraph(490, 300, 1, 0, sucore->sucoreImgHandl[n3 + 60], TRUE,FALSE);
+		//DrawRotaGraph(680, 300, 1, 0, sucore->sucoreImgHandl[n2 + 60], TRUE,FALSE);
+		//DrawRotaGraph(870, 300, 1, 0, sucore->sucoreImgHandl[n1 + 60], TRUE,FALSE);
+
 		DrawExtendGraph(300, 300, 640, 640, sucore->sucoreImgHandl[n4 + 60], TRUE);
 		DrawExtendGraph(490, 300, 830, 640, sucore->sucoreImgHandl[n3 + 60], TRUE);
 		DrawExtendGraph(680, 300, 1020, 640, sucore->sucoreImgHandl[n2 + 60], TRUE);
