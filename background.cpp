@@ -8,6 +8,8 @@ void BackGroundInit(BackGround* back)
 	//背景設定
 	back->backImg = LoadGraph("img/backImg/blue.jpg");
 	back->resultBackImg = LoadGraph("img/backImg/resultBack.png");
+	//草画像読込み
+	back->bushImg = LoadGraph("img/backImg/bush.png");
 	//道画像設定
 	back->roadImg = LoadGraph("img/backImg/gras.jpg");
 	//鳥画像設定
@@ -27,6 +29,9 @@ void BackGroundInit(BackGround* back)
 	//鳥の座標せってい
 	back->bardImgX = 1200;
 	back->bardImgY = 100;
+	//草座標設定
+	back->bushImgX = 1200;
+	back->bushImgY = 450;
 	
 }
 
@@ -40,6 +45,8 @@ void BackGroundUpdate(BackGround* back)
 		//雲の移動
 		back->cloudImgX[i] -= CLOUD_MOVE_SPEED;
 	}
+	//草移動
+	back->bushImgX -= BUSH_MOVE_SPEED;
 	
 	//画面外に出たら座標リセット
 	for (int i = 0; i < 2; i++)
@@ -47,13 +54,17 @@ void BackGroundUpdate(BackGround* back)
 		if (back->cloudImgX[i] + CLOUD_IMG_SIZEE_X < 0)
 		{
 			back->cloudImgX[i] = CLOUD_POS_X;
-			back->cloudImgY[i] = rand() % 15 * 10;
+			back->cloudImgY[i] = rand() % 10 * 10;
 		}
 	}
 	if (back->bardImgX + BARD_IMG_SIZE < 0)
 	{
 		back->bardImgX = rand() % 5 * 100 + 1300;
 		back->bardImgY = rand() % 4 * 100;
+	}
+	if (back->bushImgX + BUSH_IMG_SIGE < 0)
+	{
+		back->bushImgX = 1200;
 	}
 	
 
@@ -68,6 +79,7 @@ void BackGroundDraw(BackGround* back)
 		DrawExtendGraph(back->cloudImgX[i], back->cloudImgY[i], back->cloudImgX[i] + CLOUD_IMG_SIZEE_X, back->cloudImgY[i] + CLOUD_IMG_SIZEE_Y, back->cloudImg[i], true);
 	}
 	DrawExtendGraph(back->bardImgX, back->bardImgY, back->bardImgX + BARD_IMG_SIZE, back->bardImgY + BARD_IMG_SIZE, back->bardImg, true);
+	DrawExtendGraph(back->bushImgX, back->bushImgY, back->bushImgX + BUSH_IMG_SIGE, back->bushImgY + BUSH_IMG_SIGE, back->bushImg, true);
 }
 
 void CountDown(int fps,bool& startflg)

@@ -1,5 +1,5 @@
 #pragma once
-#define TIMELIMIT 10	//90
+#define TIMELIMIT 90	//90
 #define TIMER_IMG_SIZE 45
 
 //タイマー構造体
